@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="50-gram-logo/src/logo.css">
+  <title>Sign up</title>
+</head>
+
+<body>
+  <div class="sign-up">
+    <div id="step1">
+      <div class="logo">
+        <div class="logo1"><strong>5</strong></div>
+        <div class="logo2"><strong>O</strong></div>
+        <div class="logo3"><strong>gram</strong></div>
+      </div>
+      <input id="account" type="text" placeholder="Email">
+      <input id="parol" type="text" placeholder="Parol">
+      <p id="error"></p>
+      <button id="next">Next</button>
+    </div>
+    <div id="step2" style="display: none;">
+      <div class="logo">
+        <div class="logo1"><strong>5</strong></div>
+        <div class="logo2"><strong>O</strong></div>
+        <div class="logo3"><strong>gram</strong></div>
+      </div>
+      <input id="name" type="text" placeholder="Ism">
+      <input id="surname" type="text" placeholder="Familiya (majburiy emass!)">
+      <input id="day" type="number" placeholder="Kun">
+      <input id="month" type="number" placeholder="Oy">
+      <input id="year" type="number" placeholder="Yil">
+      <select id="gender">
+        <option value="">Jins (majburiy emass!)</option>
+        <option value="erkak">Erkak</option>
+        <option value="ayol">Ayol</option>
+      </select>
+      <p id="error2"></p>
+      <button id="done" style="display: none;">Done</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initLogo } from "./50-gram-logo/src/logo.js";
+    import "./src/main.js";
+
+    initLogo("body");
+  </script>
+</body>
+
+</html>

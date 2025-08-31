@@ -1,0 +1,76 @@
+body.darkmode {
+    background-color: black;
+}
+
+.logo {
+    position: relative;
+    gap: 10px;
+    top: -30px;
+    right: 30px;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: left;
+    align-items: last center;
+    font-size: 100px;
+    color: silver;
+    background: transparent;
+    background-color: transparent;
+}
+
+.logo1 {
+    position: relative;
+    right: -8px;
+    font-size: 35px;
+}
+
+.logo2 {
+    position: relative;
+    top: 1px;
+    font-size: 34.5px;
+    transition: transform 0.6s ease, text-shadow 0.6s ease;
+    color: rgb(243, 200, 8);
+    cursor: pointer;
+}
+
+.logo2.rotated {
+    transform: rotateY(180deg);
+    text-shadow:
+        0 0 10px rgb(243, 200, 8),
+        0 0 20px rgba(243, 200, 8, 0.6),
+        0 0 40px rgba(243, 200, 8, 0.4);
+}
+
+.logo2 {
+    transition: transform 0.6s ease;
+}
+
+.logo3 {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.logo3.moved {
+    transform: translateX(-100px);
+}
+
+.logo3::after {
+    position: absolute;
+    top: 24px;
+    margin-left: -5px;
+    content: attr(data-price);
+    transform: translateY(-50%) translateX(50px);
+    font-size: 20px;
+    color: gold;
+    background: transparent;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+}
+
+.logo3.clicked::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}

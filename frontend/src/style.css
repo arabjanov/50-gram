@@ -1,0 +1,367 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #281bb8 0%, #869acc 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2a2a2e 0%, #08080a 100%);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: -1;
+}
+
+body.darkmode::before {
+    opacity: 1;
+}
+
+body.darkmode #step1,
+body.darkmode #step2 {
+    background: transparent;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.651);
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step1 input,
+body.darkmode #step2 input,
+body.darkmode #step2 select {
+    background-color: transparent;
+    border: 2px solid rgb(170, 170, 188);
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step1 input:focus,
+body.darkmode #step2 input:focus,
+body.darkmode #step2 select:focus {
+    outline: none;
+    border-color: rgb(170, 170, 188);
+    background-color: transparent;
+    box-shadow: 0 0px 10px silver;
+}
+
+body.darkmode #step1 input::placeholder,
+body.darkmode #step2 input::placeholder {
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step2 select {
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step2 select option {
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #next,
+body.darkmode #done {
+    background: transparent;
+    color: rgb(170, 170, 188);
+    box-shadow: 0 0 5px silver;
+}
+
+body.darkmode #next:hover,
+body.darkmode #done:hover {
+    background: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+}
+
+body.darkmode #error,
+body.darkmode #error2 {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 1px solid red;
+    color: #ff6666;
+}
+
+.error-box {
+    color: #dc3545 !important;
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+/* default (light) success */
+.success-box {
+    color: #28a745 !important;
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid #28a745 !important;
+}
+
+body.darkmode .error-box {
+    color: #ff6666 !important;
+    background-color: rgba(255, 0, 0, 0.2) !important;
+    border: 1px solid red !important;
+}
+
+/* 🔥 dark mode dagi success */
+body.darkmode .success-box {
+    color: #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.15) !important;
+    border: 1px solid #28a745 !important;
+}
+
+#step1,
+#step2 {
+    background: transparent;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+#step1 input,
+#step2 input,
+#step2 select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 2px solid rgb(170, 170, 188);
+    color: rgb(224, 224, 234);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+#step1 input:focus,
+#step2 input:focus,
+#step2 select:focus {
+    outline: none;
+    border-color: silver;
+    background-color: transparent;
+    box-shadow: 0 0 0 1px rgb(170, 170, 188);
+}
+
+#step1 input::placeholder,
+#step2 input::placeholder {
+    color: #dee3e8;
+    font-weight: 400;
+}
+
+#step2 select {
+    color: #dee3e8;
+    cursor: pointer;
+}
+
+#step2 select option {
+    color: #dee3e8;
+}
+
+#next,
+#done {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+}
+
+#next:hover,
+#done:hover {
+    background: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 0px 15px silver;
+}
+
+#next:active,
+#done:active {
+    transform: translateY(0);
+}
+
+#error,
+#error2 {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    display: block;
+    min-height: 20px;
+}
+
+#error:empty,
+#error2:empty {
+    display: none;
+}
+
+#done {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+}
+
+#done.success {
+    color: #28a745;
+    box-shadow: 0 0 12px rgba(40, 167, 69, 0.7);
+    transform: scale(1);
+    transition: all 0.4s ease;
+}
+
+#done.reset {
+    color: white;
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+    transform: scale(1);
+    transition: all 0.4s ease;
+}
+
+#done.unsuccess {
+    color: #dc3545;
+    box-shadow: 0 0 12px rgba(40, 167, 69, 0.7);
+    transform: scale(1);
+    transition: all 0.4s ease;
+}
+
+#done.unreset {
+    color: white;
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+    transform: scale(1);
+    transition: all 0.4s ease;
+}
+
+
+.success {
+    border: 2px solid #28a745 !important;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.8) !important;
+    color: #28a745 !important;
+}
+
+input.success {
+    border: 2px solid #28a745 !important;
+    box-shadow: 0 0 6px rgba(40, 167, 69, 0.6) !important;
+    color: #28a745 !important;
+}
+
+input.unsuccess {
+    border: 2px solid #dc3545 !important;
+    box-shadow: 0 0 6px rgba(167, 40, 40, 0.8) !important;
+    color: #dc3545 !important;
+}
+
+/* Success xabar */
+#successMessage {
+    color: #28a745;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid #28a745;
+    border-radius: 4px;
+    display: none;
+}
+
+#successMessage.show {
+    display: block;
+}
+
+.unsuccess {
+    border: 2px solid #dc3545 !important;
+    box-shadow: 0 0 10px rgba(167, 40, 40, 0.8) !important;
+    color: #dc3545 !important;
+}
+
+/* Success xabar */
+#unsuccessMessage {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    display: none;
+}
+
+#unsuccessMessage.show {
+    display: block;
+}
+
+@media (max-width: 480px) {
+
+    #step1,
+    #step2 {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    body {
+        padding: 10px;
+    }
+}
+
+#step2 {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input:invalid {
+    border-color: #dc3545;
+}
+
+input:valid {
+    border-color: #28a745;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
