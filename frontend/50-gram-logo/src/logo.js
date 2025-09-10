@@ -1,6 +1,28 @@
 export function initLogo(scope = "body") {
     const logos = document.querySelectorAll(`${scope} .logo`);
 
+    // Logo effektlarini yangilash funksiyasi
+    function updateLogoEffects() {
+        const logos = document.querySelectorAll('.logo');
+        logos.forEach(logo => {
+            const logo2 = logo.querySelector('.logo2');
+            if (logo2) {
+                if (document.body.classList.contains('darkmode')) {
+                    logo2.style.textShadow = '0 0 15px gold';
+                } else {
+                    logo2.style.textShadow = 'none';
+                }
+            }
+        });
+    }
+
+    // Sahifa yuklanganda localStorage'dan dark mode holatini olish
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('darkmode');
+    }
+    updateLogoEffects();
+
     logos.forEach((logo) => {
         const logo2 = logo.querySelector(".logo2");
         const logo3 = logo.querySelector(".logo3");
@@ -9,8 +31,14 @@ export function initLogo(scope = "body") {
             logo2.addEventListener("click", () => {
                 logo2.classList.toggle("rotated");
                 document.body.classList.toggle("darkmode");
+
+                // Holatni localStorage'ga saqlash
+                localStorage.setItem("darkMode", document.body.classList.contains("darkmode"));
+
+                // Logo effektlarini yangilash
+                updateLogoEffects();
             });
-        };
+        }
 
         if (logo3) {
             logo3.addEventListener("click", async () => {
@@ -27,10 +55,8 @@ export function initLogo(scope = "body") {
                     }
                 } catch (err) {
                     logo3.setAttribute("data-price", "Narxni olishda xatolik");
-                };
+                }
             });
-        };
-
+        }
     });
-};
-
+}
