@@ -32,92 +32,10 @@ body.darkmode::before {
     opacity: 1;
 }
 
-body.darkmode #step1,
-body.darkmode #step2 {
-    background: transparent;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.651);
-    color: rgb(170, 170, 188);
-}
-
-body.darkmode #step1 input,
-body.darkmode #step2 input,
-body.darkmode #step2 select {
-    background-color: transparent;
-    border: 2px solid rgb(170, 170, 188);
-    color: rgb(170, 170, 188);
-}
-
-body.darkmode #step1 input:focus,
-body.darkmode #step2 input:focus,
-body.darkmode #step2 select:focus {
-    outline: none;
-    border-color: rgb(170, 170, 188);
-    background-color: transparent;
-    box-shadow: 0 0px 10px silver;
-}
-
-body.darkmode #step1 input::placeholder,
-body.darkmode #step2 input::placeholder {
-    color: rgb(170, 170, 188);
-}
-
-body.darkmode #step2 select {
-    color: rgb(170, 170, 188);
-}
-
-body.darkmode #step2 select option {
-    color: rgb(170, 170, 188);
-}
-
-body.darkmode #next,
-body.darkmode #done {
-    background: transparent;
-    color: rgb(170, 170, 188);
-    box-shadow: 0 0 5px silver;
-}
-
-body.darkmode #next:hover,
-body.darkmode #done:hover {
-    background: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 0px 10px rgb(170, 170, 188);
-}
-
-body.darkmode #error,
-body.darkmode #error2 {
-    background-color: rgba(255, 0, 0, 0.2);
-    border: 1px solid red;
-    color: #ff6666;
-}
-
-.error-box {
-    color: #dc3545 !important;
-    background-color: rgb(255, 255, 255) !important;
-    border: 1px solid #f5c6cb !important;
-}
-
-/* default (light) success */
-.success-box {
-    color: #28a745 !important;
-    background-color: rgb(255, 255, 255) !important;
-    border: 1px solid #28a745 !important;
-}
-
-body.darkmode .error-box {
-    color: #ff6666 !important;
-    background-color: rgba(255, 0, 0, 0.2) !important;
-    border: 1px solid red !important;
-}
-
-/* 🔥 dark mode dagi success */
-body.darkmode .success-box {
-    color: #28a745 !important;
-    background-color: rgba(40, 167, 69, 0.15) !important;
-    border: 1px solid #28a745 !important;
-}
-
+/* Umumiy formalar uchun stillar */
 #step1,
-#step2 {
+#step2,
+#login-step {
     background: transparent;
     padding: 40px;
     border-radius: 12px;
@@ -127,9 +45,11 @@ body.darkmode .success-box {
     margin-bottom: 20px;
 }
 
+/* Umumiy input va selectlar uchun stillar */
 #step1 input,
 #step2 input,
-#step2 select {
+#step2 select,
+#login-step input {
     width: 100%;
     padding: 15px;
     margin-bottom: 15px;
@@ -141,17 +61,21 @@ body.darkmode .success-box {
     background-color: transparent;
 }
 
+/* Fokus holati */
 #step1 input:focus,
 #step2 input:focus,
-#step2 select:focus {
+#step2 select:focus,
+#login-step input:focus {
     outline: none;
     border-color: silver;
     background-color: transparent;
     box-shadow: 0 0 0 1px rgb(170, 170, 188);
 }
 
+/* Placeholder stillari */
 #step1 input::placeholder,
-#step2 input::placeholder {
+#step2 input::placeholder,
+#login-step input::placeholder {
     color: #dee3e8;
     font-weight: 400;
 }
@@ -165,8 +89,10 @@ body.darkmode .success-box {
     color: #dee3e8;
 }
 
+/* Umumiy tugmalar uchun stillar */
 #next,
-#done {
+#done,
+#loginBtn {
     background: transparent;
     color: white;
     border: none;
@@ -183,8 +109,10 @@ body.darkmode .success-box {
     box-shadow: 0 0px 10px rgb(170, 170, 188);
 }
 
+/* Tugmalarning hover holati */
 #next:hover,
-#done:hover {
+#done:hover,
+#loginBtn:hover {
     background: transparent;
     transform: translateY(-2px);
     box-shadow: 0 0px 15px silver;
@@ -195,8 +123,10 @@ body.darkmode .success-box {
     transform: translateY(0);
 }
 
+/* Umumiy xatolik xabarlari */
 #error,
-#error2 {
+#error2,
+#loginError {
     color: #dc3545;
     font-size: 14px;
     margin-top: -10px;
@@ -210,26 +140,105 @@ body.darkmode .success-box {
 }
 
 #error:empty,
-#error2:empty {
+#error2:empty,
+#loginError:empty {
     display: none;
 }
 
-#done {
+/* ===== DARK MODE STILLARI ===== */
+
+body.darkmode #step1,
+body.darkmode #step2,
+body.darkmode #login-step {
     background: transparent;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 400px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.651);
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step1 input,
+body.darkmode #step2 input,
+body.darkmode #step2 select,
+body.darkmode #login-step input {
+    background-color: transparent;
+    border: 2px solid rgb(170, 170, 188);
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step1 input:focus,
+body.darkmode #step2 input:focus,
+body.darkmode #step2 select:focus,
+body.darkmode #login-step input:focus {
+    outline: none;
+    border-color: rgb(170, 170, 188);
+    background-color: transparent;
+    box-shadow: 0 0px 10px silver;
+}
+
+body.darkmode #step1 input::placeholder,
+body.darkmode #step2 input::placeholder,
+body.darkmode #login-step input::placeholder {
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step2 select {
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #step2 select option {
+    color: rgb(170, 170, 188);
+}
+
+body.darkmode #next,
+body.darkmode #done,
+body.darkmode #loginBtn {
+    background: transparent;
+    color: rgb(170, 170, 188);
+    box-shadow: 0 0 5px silver;
+}
+
+body.darkmode #next:hover,
+body.darkmode #done:hover,
+body.darkmode #loginBtn:hover {
+    background: transparent;
+    transform: translateY(-2px);
     box-shadow: 0 0px 10px rgb(170, 170, 188);
 }
+
+body.darkmode #error,
+body.darkmode #error2,
+body.darkmode #loginError {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 1px solid red;
+    color: #ff6666;
+}
+
+/* ===== ERROR VA SUCCESS BOX STILLARI ===== */
+.error-box {
+    color: #dc3545 !important;
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid #f5c6cb !important;
+}
+
+.success-box {
+    color: #28a745 !important;
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid #28a745 !important;
+}
+
+body.darkmode .error-box {
+    color: #ff6666 !important;
+    background-color: rgba(255, 0, 0, 0.2) !important;
+    border: 1px solid red !important;
+}
+
+body.darkmode .success-box {
+    color: #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.15) !important;
+    border: 1px solid #28a745 !important;
+}
+
+
+/* ===== Boshqa stillar (o'zgarishsiz) ===== */
 
 #done.success {
     color: #28a745;
@@ -266,33 +275,16 @@ body.darkmode .success-box {
     color: #28a745 !important;
 }
 
-input.success {
+sinput.success {
     border: 2px solid #28a745 !important;
     box-shadow: 0 0 6px rgba(40, 167, 69, 0.6) !important;
     color: #28a745 !important;
 }
 
-input.unsuccess {
+sinput.unsuccess {
     border: 2px solid #dc3545 !important;
     box-shadow: 0 0 6px rgba(167, 40, 40, 0.8) !important;
     color: #dc3545 !important;
-}
-
-/* Success xabar */
-#successMessage {
-    color: #28a745;
-    font-size: 14px;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    padding: 8px;
-    background-color: rgba(40, 167, 69, 0.1);
-    border: 1px solid #28a745;
-    border-radius: 4px;
-    display: none;
-}
-
-#successMessage.show {
-    display: block;
 }
 
 .unsuccess {
@@ -301,27 +293,11 @@ input.unsuccess {
     color: #dc3545 !important;
 }
 
-/* Success xabar */
-#unsuccessMessage {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    padding: 8px;
-    background-color: rgba(40, 167, 69, 0.1);
-    border: 1px solid #dc3545;
-    border-radius: 4px;
-    display: none;
-}
-
-#unsuccessMessage.show {
-    display: block;
-}
-
 @media (max-width: 480px) {
 
     #step1,
-    #step2 {
+    #step2,
+    #login-step {
         padding: 30px 20px;
         margin: 10px;
     }
@@ -364,4 +340,29 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.auth-switch {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.auth-switch button {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0px 10px rgb(170, 170, 188);
+    transition: all 0.3s ease;
+}
+
+.auth-switch button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0px 15px silver;
 }

@@ -6,48 +6,156 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="src/style.css">
   <link rel="stylesheet" href="50-gram-logo/src/logo.css">
-  <title>Sign up</title>
+  <title>Auth</title>
 </head>
 
 <body>
-  <div class="sign-up">
-    <div id="step1">
-      <div class="logo">
-        <div class="logo1"><strong>5</strong></div>
-        <div class="logo2"><strong>O</strong></div>
-        <div class="logo3"><strong>gram</strong></div>
+  <div class="auth-container">
+    <!-- SIGN UP form (sening signup formang) -->
+    <div id="signupForm" style="display: block;">
+      <div class="sign-up">
+        <div id="step1">
+          <div class="logo">
+            <div class="logo1"><strong>5</strong></div>
+            <div class="logo2"><strong>O</strong></div>
+            <div class="logo3"><strong>gram</strong></div>
+          </div>
+          <div class="auth-switch">
+            <button class="showSignin" style="margin-left: -225px;">Sign In</button>
+          </div>
+          <input id="account" type="text" placeholder="Email">
+          <input id="parol" type="password" placeholder="Parol">
+          <p id="error"></p>
+          <button id="next">Next</button>
+        </div>
+        <div id="step2" style="display: none;">
+          <div class="logo">
+            <div class="logo1"><strong>5</strong></div>
+            <div class="logo2"><strong>O</strong></div>
+            <div class="logo3"><strong>gram</strong></div>
+          </div>
+          <div class="auth-switch">
+            <button class="showSignin" style="margin-left: -225px;">Sign In</button>
+          </div>
+          <input id="name" type="text" placeholder="Ism">
+          <input id="surname" type="text" placeholder="Familiya (majburiy emass!)">
+          <input id="day" type="number" placeholder="Kun">
+          <input id="month" type="number" placeholder="Oy">
+          <input id="year" type="number" placeholder="Yil">
+          <select id="gender">
+            <option value="">Jins (majburiy emass!)</option>
+            <option value="erkak">Erkak</option>
+            <option value="ayol">Ayol</option>
+          </select>
+          <p id="error2"></p>
+          <button id="done" style="display: none;">Send</button>
+        </div>
       </div>
-      <input id="account" type="text" placeholder="Email">
-      <input id="parol" type="text" placeholder="Parol">
-      <p id="error"></p>
-      <button id="next">Next</button>
     </div>
-    <div id="step2" style="display: none;">
-      <div class="logo">
-        <div class="logo1"><strong>5</strong></div>
-        <div class="logo2"><strong>O</strong></div>
-        <div class="logo3"><strong>gram</strong></div>
+    <div id="signinForm" style="display: none;">
+      <div class="sign-up">
+        <div id="login-step">
+          <div class="logo">
+            <div class="logo1"><strong>5</strong></div>
+            <div class="logo2"><strong>O</strong></div>
+            <div class="logo3"><strong>gram</strong></div>
+          </div>
+          <div class="auth-switch">
+            <button class="showSignup" style="margin-left: -225px;">Sign Up</button>
+          </div>
+          <input id="loginEmail" type="text" placeholder="Email">
+          <input id="loginParol" type="password" placeholder="Parol">
+          <p id="loginError"></p>
+          <button id="loginBtn">Login</button>
+        </div>
       </div>
-      <input id="name" type="text" placeholder="Ism">
-      <input id="surname" type="text" placeholder="Familiya (majburiy emass!)">
-      <input id="day" type="number" placeholder="Kun">
-      <input id="month" type="number" placeholder="Oy">
-      <input id="year" type="number" placeholder="Yil">
-      <select id="gender">
-        <option value="">Jins (majburiy emass!)</option>
-        <option value="erkak">Erkak</option>
-        <option value="ayol">Ayol</option>
-      </select>
-      <p id="error2"></p>
-      <button id="done" style="display: none;">Done</button>
     </div>
   </div>
 
+  <!-- SIGN IN form -->
+
   <script type="module">
     import { initLogo } from "./50-gram-logo/src/logo.js";
-    import "./src/main.js";
+    import "./src/main.js"; // bu sening signup js koding
 
     initLogo("body");
+
+
+    // Formani va yozuvni toggle qilish funksiyasi
+    function toggleForms(target) {
+      if (target === "signup") {
+        signupForm.style.display = "block";
+        signinForm.style.display = "none";
+        animateTextChange("Sign In");
+      } else if (target === "signin") {
+        signupForm.style.display = "none";
+        signinForm.style.display = "block";
+        animateTextChange("Sign Up");
+      }
+    }
+
+    // Animatsiya funksiyasi
+    function animateTextChange(newText) {
+      toggleText.style.opacity = "0";
+      setTimeout(() => {
+        toggleText.textContent = newText;
+        toggleText.style.opacity = "1";
+      }, 200);
+    }
+
+    // Event listenerlar
+    showSignup.addEventListener("click", () => toggleForms("signup"));
+    showSignin.addEventListener("click", () => toggleForms("signin"));
+
+    // ToggleText bosilganda ham formalarni almashtirish
+    toggleText.addEventListener("click", () => {
+      if (signupForm.style.display === "block") {
+        toggleForms("signin");
+      } else {
+        toggleForms("signup");
+      }
+    });
+
+
+    // LOGIN JS
+    const emailInt = document.getElementById("loginEmail");
+    const parolInt = document.getElementById("loginParol");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginError = document.getElementById("loginError");
+
+    loginBtn.addEventListener("click", handleLogin);
+
+    async function handleLogin() {
+      const email = emailInt.value.trim();
+      const parol = parolInt.value.trim();
+
+      if (!email || !parol) {
+        loginError.textContent = "Email va parol kiritilishi kerak!";
+        return;
+      }
+
+      try {
+        const res = await fetch("http://127.0.0.1:3000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, parol })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          loginError.textContent = data.message;
+          loginError.classList.remove("error-box");
+          loginError.classList.add("success-box");
+        } else {
+          loginError.textContent = data.message || "❌ Xatolik!";
+          loginError.classList.remove("success-box");
+          loginError.classList.add("error-box");
+        }
+      } catch (err) {
+        loginError.textContent = "Serverga ulanishda xatolik: " + err.message;
+      }
+    }
   </script>
 </body>
 

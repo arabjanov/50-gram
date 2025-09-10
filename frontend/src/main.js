@@ -14,6 +14,28 @@ const sendBtn = document.getElementById("done");
 const step1 = document.getElementById("step1");
 const step2 = document.getElementById("step2");
 
+const signupForm = document.getElementById("signupForm");
+const signinForm = document.getElementById("signinForm");
+
+// 🔥 endi class bilan ishlatamiz
+document.querySelectorAll(".showSignup").forEach(btn => {
+    btn.addEventListener("click", () => toggleForms("signup"));
+});
+document.querySelectorAll(".showSignin").forEach(btn => {
+    btn.addEventListener("click", () => toggleForms("signin"));
+});
+
+function toggleForms(target) {
+    if (target === "signup") {
+        signupForm.style.display = "block";
+        signinForm.style.display = "none";
+    } else {
+        signupForm.style.display = "none";
+        signinForm.style.display = "block";
+    }
+};
+
+
 let emailIntValue = "";
 let parolIntValue = 0;
 
@@ -112,6 +134,7 @@ yearInt.addEventListener("keydown", (e) => {
 genderSel.addEventListener("keydown", (e) => {
     if (e.key === "Enter") send();
 });
+
 
 sendBtn.addEventListener("click", send)
 async function send() {
