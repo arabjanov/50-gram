@@ -76,46 +76,9 @@
 
   <script type="module">
     import { initLogo } from "./50-gram-logo/src/logo.js";
-    import "./src/main.js"; // bu sening signup js koding
+    import "./src/main.js";
 
     initLogo("body");
-
-
-    // Formani va yozuvni toggle qilish funksiyasi
-    function toggleForms(target) {
-      if (target === "signup") {
-        signupForm.style.display = "block";
-        signinForm.style.display = "none";
-        animateTextChange("Sign In");
-      } else if (target === "signin") {
-        signupForm.style.display = "none";
-        signinForm.style.display = "block";
-        animateTextChange("Sign Up");
-      }
-    }
-
-    // Animatsiya funksiyasi
-    function animateTextChange(newText) {
-      toggleText.style.opacity = "0";
-      setTimeout(() => {
-        toggleText.textContent = newText;
-        toggleText.style.opacity = "1";
-      }, 200);
-    }
-
-    // Event listenerlar
-    showSignup.addEventListener("click", () => toggleForms("signup"));
-    showSignin.addEventListener("click", () => toggleForms("signin"));
-
-    // ToggleText bosilganda ham formalarni almashtirish
-    toggleText.addEventListener("click", () => {
-      if (signupForm.style.display === "block") {
-        toggleForms("signin");
-      } else {
-        toggleForms("signup");
-      }
-    });
-
 
     // LOGIN JS
     const emailInt = document.getElementById("loginEmail");
