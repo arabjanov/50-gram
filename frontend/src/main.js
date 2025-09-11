@@ -26,12 +26,22 @@ document.querySelectorAll(".showSignin").forEach(btn => {
 });
 
 function toggleForms(target) {
+    const statusElements = document.querySelectorAll(".status-text");
+
     if (target === "signup") {
         signupForm.style.display = "block";
         signinForm.style.display = "none";
+        // Status matnini yangilash
+        statusElements.forEach(el => {
+            el.textContent = "Siz Sign Up qismidasiz";
+        });
     } else {
         signupForm.style.display = "none";
         signinForm.style.display = "block";
+        // Status matnini yangilash
+        statusElements.forEach(el => {
+            el.textContent = "Siz Sign In qismidasiz";
+        });
     }
 };
 

@@ -366,3 +366,16 @@ input[type="number"]::-webkit-inner-spin-button {
     transform: translateY(-2px);
     box-shadow: 0 0px 15px silver;
 }
+
+.status-text {
+    color: gold;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 20px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+body.darkmode .status-text {
+    color: gold;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+}
