@@ -94,6 +94,16 @@
 
       if (!email || !parol) {
         loginError.textContent = "Email va parol kiritilishi kerak!";
+        loginError.classList.remove("success-box");
+        loginError.classList.add("error-box");
+        return;
+      }
+
+      // Email validatsiyasi
+      if (!email.endsWith("@gmail.com")) {
+        loginError.textContent = "Account oxirida @gmail.com bolishi kerak!";
+        loginError.classList.remove("success-box");
+        loginError.classList.add("error-box");
         return;
       }
 
@@ -111,12 +121,27 @@
           loginError.classList.remove("error-box");
           loginError.classList.add("success-box");
         } else {
-          loginError.textContent = data.message || "❌ Xatolik!";
+          // Server javobidagi xatolik kodiga qarab aniq xabar berish
+          if (data.message.includes("Email yoki parol")) {
+            // Avval emailni tekshiramiz - mavjudligini
+            const checkRes = await fetch(`https://five0-gram-1.onrender.com/users/check?email=${encodeURIComponent(email)}`);
+            if (checkRes.ok) {
+              // Email mavjud emas demak
+              loginError.textContent = "Bunday account mavjud emas!";
+            } else {
+              // Email mavjud, parol noto'g'ri
+              loginError.textContent = "Parol noto'g'ri!";
+            }
+          } else {
+            loginError.textContent = data.message || "❌ Xatolik!";
+          }
           loginError.classList.remove("success-box");
           loginError.classList.add("error-box");
         }
       } catch (err) {
         loginError.textContent = "Serverga ulanishda xatolik: " + err.message;
+        loginError.classList.remove("success-box");
+        loginError.classList.add("error-box");
       }
     }
   </script>
