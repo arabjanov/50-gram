@@ -1,134 +1,162 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>50-Gram</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 400px;
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #4CAF50;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #45a049;
-    }
-
-    .error-box {
-      color: #ff5252;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .success-box {
-      color: #4caf50;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .link {
-      display: block;
-      text-align: center;
-      color: #aaa;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    #step2 {
-      display: none;
-    }
-
-    #signinForm {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="50-gram-logo/src/logo.css">
+  <title>Auth</title>
 </head>
 
 <body>
-  <div class="container">
-    <!-- === SIGNUP FORM === -->
-    <form id="signupForm">
-      <h2>Ro‘yxatdan o‘tish</h2>
-
-      <div id="step1">
-        <input type="email" id="account" placeholder="Email">
-        <input type="password" id="parol" placeholder="Parol">
-        <p id="error" class="error-box"></p>
-        <button type="button" id="next">Keyingi</button>
+  <div class="auth-container">
+    <!-- SIGN UP form (sening signup formang) -->
+    <div id="signupForm" style="display: block;">
+      <div class="sign-up">
+        <div id="step1">
+          <div class="logo">
+            <div class="logo1"><strong>5</strong></div>
+            <div class="logo2"><strong>O</strong></div>
+            <div class="logo3"><strong>gram</strong></div>
+          </div>
+          <div class="auth-switch">
+            <button class="showSignin" style="margin-left: -225px;">Sign In</button>
+          </div>
+          <input id="account" type="text" placeholder="Email">
+          <input id="parol" type="password" placeholder="Parol">
+          <p id="error"></p>
+          <button id="next">Next</button>
+        </div>
+        <div id="step2" style="display: none;">
+          <div class="logo">
+            <div class="logo1"><strong>5</strong></div>
+            <div class="logo2"><strong>O</strong></div>
+            <div class="logo3"><strong>gram</strong></div>
+          </div>
+          <div class="auth-switch">
+            <button class="showSignin" style="margin-left: -225px;">Sign In</button>
+          </div>
+          <input id="name" type="text" placeholder="Ism">
+          <input id="surname" type="text" placeholder="Familiya (majburiy emass!)">
+          <input id="day" type="number" placeholder="Kun">
+          <input id="month" type="number" placeholder="Oy">
+          <input id="year" type="number" placeholder="Yil">
+          <select id="gender">
+            <option value="">Jins (majburiy emass!)</option>
+            <option value="erkak">Erkak</option>
+            <option value="ayol">Ayol</option>
+          </select>
+          <p id="error2"></p>
+          <button id="done" style="display: none;">Send</button>
+        </div>
       </div>
-
-      <div id="step2">
-        <input type="text" id="name" placeholder="Ism">
-        <input type="text" id="surname" placeholder="Familiya (ixtiyoriy)">
-        <input type="number" id="day" placeholder="Kun">
-        <input type="number" id="month" placeholder="Oy">
-        <input type="number" id="year" placeholder="Yil">
-        <select id="gender">
-          <option value="">Jins</option>
-          <option value="Erkak">Erkak</option>
-          <option value="Ayol">Ayol</option>
-        </select>
-        <p id="error2" class="error-box"></p>
-        <button type="button" id="done">Ro‘yxatdan o‘tish</button>
+    </div>
+    <div id="signinForm" style="display: none;">
+      <div class="sign-up">
+        <div id="login-step">
+          <div class="logo">
+            <div class="logo1"><strong>5</strong></div>
+            <div class="logo2"><strong>O</strong></div>
+            <div class="logo3"><strong>gram</strong></div>
+          </div>
+          <div class="auth-switch">
+            <button class="showSignup" style="margin-left: -225px;">Sign Up</button>
+          </div>
+          <input id="loginEmail" type="text" placeholder="Email">
+          <input id="loginParol" type="password" placeholder="Parol">
+          <p id="loginError"></p>
+          <button id="loginBtn">Login</button>
+        </div>
       </div>
-
-      <span class="link showSignin">Tizimga kirish</span>
-    </form>
-
-    <!-- === SIGNIN FORM === -->
-    <form id="signinForm">
-      <h2>Tizimga kirish</h2>
-      <input type="email" id="loginEmail" placeholder="Email">
-      <input type="password" id="loginPassword" placeholder="Parol">
-      <p id="loginError" class="error-box"></p>
-      <button type="button" id="loginBtn">Kirish</button>
-      <span class="link showSignup">Ro‘yxatdan o‘tish</span>
-    </form>
+    </div>
   </div>
 
-  <script src="main.js"></script>
+  <!-- SIGN IN form -->
+
+  <script type="module">
+    import { initLogo } from "./50-gram-logo/src/logo.js";
+    import "./src/main.js"; // bu sening signup js koding
+
+    initLogo("body");
+
+
+    // Formani va yozuvni toggle qilish funksiyasi
+    function toggleForms(target) {
+      if (target === "signup") {
+        signupForm.style.display = "block";
+        signinForm.style.display = "none";
+        animateTextChange("Sign In");
+      } else if (target === "signin") {
+        signupForm.style.display = "none";
+        signinForm.style.display = "block";
+        animateTextChange("Sign Up");
+      }
+    }
+
+    // Animatsiya funksiyasi
+    function animateTextChange(newText) {
+      toggleText.style.opacity = "0";
+      setTimeout(() => {
+        toggleText.textContent = newText;
+        toggleText.style.opacity = "1";
+      }, 200);
+    }
+
+    // Event listenerlar
+    showSignup.addEventListener("click", () => toggleForms("signup"));
+    showSignin.addEventListener("click", () => toggleForms("signin"));
+
+    // ToggleText bosilganda ham formalarni almashtirish
+    toggleText.addEventListener("click", () => {
+      if (signupForm.style.display === "block") {
+        toggleForms("signin");
+      } else {
+        toggleForms("signup");
+      }
+    });
+
+
+    // LOGIN JS
+    const emailInt = document.getElementById("loginEmail");
+    const parolInt = document.getElementById("loginParol");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginError = document.getElementById("loginError");
+
+    loginBtn.addEventListener("click", handleLogin);
+
+    async function handleLogin() {
+      const email = emailInt.value.trim();
+      const parol = parolInt.value.trim();
+
+      if (!email || !parol) {
+        loginError.textContent = "Email va parol kiritilishi kerak!";
+        return;
+      }
+
+      try {
+        const res = await fetch("https://five0-gram-1.onrender.com/users/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, parol })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          loginError.textContent = data.message;
+          loginError.classList.remove("error-box");
+          loginError.classList.add("success-box");
+        } else {
+          loginError.textContent = data.message || "❌ Xatolik!";
+          loginError.classList.remove("success-box");
+          loginError.classList.add("error-box");
+        }
+      } catch (err) {
+        loginError.textContent = "Serverga ulanishda xatolik: " + err.message;
+      }
+    }
+  </script>
 </body>
 
 </html>
