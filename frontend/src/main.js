@@ -35,7 +35,6 @@ function toggleForms(target) {
     }
 };
 
-
 let emailIntValue = "";
 let parolIntValue = 0;
 
@@ -58,18 +57,35 @@ async function handleNext() {
     if (!email || !parol) {
         errorMessage.textContent = "Email yki parol notogri terilgan!"
         errorMessage.classList.add("show")
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+            errorMessage.textContent = "";
+            errorMessage.classList.remove("show");
+        }, 2000);
         return;
     }
     else if (!email.endsWith("@gmail.com")) {
         errorMessage.textContent = "Account oxirida @gmail.com bolishi kerak!";
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+            errorMessage.textContent = "";
+        }, 2000);
         return;
     }
     else if (email.length < 15) {
         errorMessage.textContent = "Emailni nomida kamida 5ta element bolishi kerak!"
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+            errorMessage.textContent = "";
+        }, 2000);
         return;
     }
     else if (!passwordRegex.test(parol)) {
         errorMessage.textContent = "Parolda 5ta belgi bolishi kerak!";
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+            errorMessage.textContent = "";
+        }, 2000);
         return;
     }
 
@@ -78,10 +94,18 @@ async function handleNext() {
         if (!res.ok) {
             const data = await res.json();
             errorMessage.textContent = data.message || "Xatolik yuz berdi!";
+            // 2 sekunddan keyin yoqolsin
+            setTimeout(() => {
+                errorMessage.textContent = "";
+            }, 2000);
             return;
         }
     } catch (err) {
         errorMessage.textContent = `Serverga ulanishda xatolik: ${err.message}`;
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+            errorMessage.textContent = "";
+        }, 2000);
         return;
     }
 
@@ -135,7 +159,6 @@ genderSel.addEventListener("keydown", (e) => {
     if (e.key === "Enter") send();
 });
 
-
 sendBtn.addEventListener("click", send)
 async function send() {
     const currentYear = new Date().getFullYear();
@@ -157,31 +180,52 @@ async function send() {
     if (day <= 0 || day > maxDay) {
         if (month === 2 && day === 29) {
             errorMessage2.textContent = `${year}-yilni ${month}-oyida ${day}-kun mavjud emas!`;
+            setTimeout(() => {
+                errorMessage2.textContent = "";
+            }, 2000);
             return;
         }
         else {
             errorMessage2.textContent = `${day}-kun ${month}-oyda mavjud emas!`;
+            setTimeout(() => {
+                errorMessage2.textContent = "";
+            }, 2000);
             return;
         }
     }
     else if (day <= 0 || day > 31) {
-        errorMessage2.textContent = `Kun ${day} to‘g‘ri kelmaydi!`;
+        errorMessage2.textContent = `Kun ${day} to'g'ri kelmaydi!`;
+        setTimeout(() => {
+            errorMessage2.textContent = "";
+        }, 2000);
         return;
     }
     else if (month <= 0 || month > 12) {
-        errorMessage2.textContent = `Oy ${month} to‘g‘ri kelmaydi!`;
+        errorMessage2.textContent = `Oy ${month} to'g'ri kelmaydi!`;
+        setTimeout(() => {
+            errorMessage2.textContent = "";
+        }, 2000);
         return;
     }
     else if (year <= 1850 || year > currentYear) {
-        errorMessage2.textContent = `Yil ${year} to‘g‘ri kelmaydi!`;
+        errorMessage2.textContent = `Yil ${year} to'g'ri kelmaydi!`;
+        setTimeout(() => {
+            errorMessage2.textContent = "";
+        }, 2000);
         return;
     }
     else if (!nameInt.value.trim() || !dayInt.value.trim() || !monthInt.value.trim() || !yearInt.value.trim()) {
-        errorMessage2.textContent = `${nameInt.placeholder}, ${dayInt.placeholder}, ${monthInt.placeholder}, ${yearInt.placeholder} bo‘lishi kerak!`;
+        errorMessage2.textContent = `${nameInt.placeholder}, ${dayInt.placeholder}, ${monthInt.placeholder}, ${yearInt.placeholder} bo'lishi kerak!`;
+        setTimeout(() => {
+            errorMessage2.textContent = "";
+        }, 2000);
         return;
     }
     else if (nameInt.value.length < 5) {
         errorMessage2.textContent = "Ismda kamida 5 ta element bolishi kerak!";
+        setTimeout(() => {
+            errorMessage2.textContent = "";
+        }, 2000);
         return;
     }
 
@@ -206,7 +250,7 @@ async function send() {
         const data = await res.json();
 
         if (res.ok) {
-            errorMessage2.textContent = "Foydalanuvchi muvaffaqiyatli ro‘yxatdan o‘tdi!";
+            errorMessage2.textContent = "Foydalanuvchi muvaffaqiyatli ro'yxatdan o'tdi!";
             errorMessage2.classList.remove("error-box");
             errorMessage2.classList.add("success-box");
 
@@ -216,7 +260,7 @@ async function send() {
             document.querySelectorAll("#step1 input, #step2 input, #step2 select")
                 .forEach(el => el.classList.add("success"));
 
-            sendBtn.textContent = "Ro‘yxatdan o‘tildi ✅";       // yozuvni ptichkaga almashtiramiz
+            sendBtn.textContent = "Ro'yxatdan o'tildi ✅";       // yozuvni ptichkaga almashtiramiz
             sendBtn.classList.add("success"); // yashil effekt beradi
 
             setTimeout(() => {
@@ -228,6 +272,10 @@ async function send() {
                 sendBtn.textContent = "Send";
                 sendBtn.classList.remove("success");
                 sendBtn.classList.add("reset"); // animatsiya bilan qaytsin
+
+                // Success xabarini ham yoqamiz
+                errorMessage2.textContent = "";
+                errorMessage2.classList.remove("success-box");
             }, 2000);
         }
         else {
@@ -250,13 +298,19 @@ async function send() {
                 sendBtn.textContent = "Send";
                 sendBtn.classList.remove("unsuccess");
                 sendBtn.classList.add("reset"); // animatsiya bilan qaytsin
+
+                // Error xabarini ham yoqamiz
+                errorMessage2.textContent = "";
+                errorMessage2.classList.remove("error-box");
             }, 2000);
         }
     } catch (err) {
         errorMessage2.textContent = `❌ Serverga ulanishda xatolik: ${err.message}`;
         errorMessage2.style.color = "#dc3545";
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+            errorMessage2.textContent = "";
+            errorMessage2.style.color = "";
+        }, 2000);
     }
-
-
 };
-
