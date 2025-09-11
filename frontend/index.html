@@ -96,6 +96,11 @@
         loginError.textContent = "Email va parol kiritilishi kerak!";
         loginError.classList.remove("success-box");
         loginError.classList.add("error-box");
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+          loginError.textContent = "";
+          loginError.classList.remove("error-box");
+        }, 2000);
         return;
       }
 
@@ -104,6 +109,11 @@
         loginError.textContent = "Account oxirida @gmail.com bolishi kerak!";
         loginError.classList.remove("success-box");
         loginError.classList.add("error-box");
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+          loginError.textContent = "";
+          loginError.classList.remove("error-box");
+        }, 2000);
         return;
       }
 
@@ -120,16 +130,18 @@
           loginError.textContent = data.message;
           loginError.classList.remove("error-box");
           loginError.classList.add("success-box");
+          // Success xabarini ham 2 sekunddan keyin yoqilsin
+          setTimeout(() => {
+            loginError.textContent = "";
+            loginError.classList.remove("success-box");
+          }, 2000);
         } else {
           // Server javobidagi xatolik kodiga qarab aniq xabar berish
           if (data.message.includes("Email yoki parol")) {
-            // Avval emailni tekshiramiz - mavjudligini
             const checkRes = await fetch(`https://five0-gram-1.onrender.com/users/check?email=${encodeURIComponent(email)}`);
             if (checkRes.ok) {
-              // Email mavjud emas demak
               loginError.textContent = "Bunday account mavjud emas!";
             } else {
-              // Email mavjud, parol noto'g'ri
               loginError.textContent = "Parol noto'g'ri!";
             }
           } else {
@@ -137,11 +149,21 @@
           }
           loginError.classList.remove("success-box");
           loginError.classList.add("error-box");
+          // 2 sekunddan keyin yoqolsin
+          setTimeout(() => {
+            loginError.textContent = "";
+            loginError.classList.remove("error-box");
+          }, 2000);
         }
       } catch (err) {
         loginError.textContent = "Serverga ulanishda xatolik: " + err.message;
         loginError.classList.remove("success-box");
         loginError.classList.add("error-box");
+        // 2 sekunddan keyin yoqolsin
+        setTimeout(() => {
+          loginError.textContent = "";
+          loginError.classList.remove("error-box");
+        }, 2000);
       }
     }
   </script>
