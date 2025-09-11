@@ -55,9 +55,9 @@ async function handleNext() {
     const parolIntValue = parolInt.value.trim();
 
     if (!email || !parol) {
-        errorMessage.textContent = "Email yki parol notogri terilgan!"
+        errorMessage.textContent = "Email va parol bo'lishi kerak!"
         errorMessage.classList.add("show")
-        // 2 sekunddan keyin yoqolsin
+        // 2 sekunddan keyin yo'qolsin
         setTimeout(() => {
             errorMessage.textContent = "";
             errorMessage.classList.remove("show");
@@ -65,24 +65,24 @@ async function handleNext() {
         return;
     }
     else if (!email.endsWith("@gmail.com")) {
-        errorMessage.textContent = "Account oxirida @gmail.com bolishi kerak!";
-        // 2 sekunddan keyin yoqolsin
+        errorMessage.textContent = "Account oxirida @gmail.com bo'lishi kerak!";
+        // 2 sekunddan keyin yo'qolsin
         setTimeout(() => {
             errorMessage.textContent = "";
         }, 2000);
         return;
     }
     else if (email.length < 15) {
-        errorMessage.textContent = "Emailni nomida kamida 5ta element bolishi kerak!"
-        // 2 sekunddan keyin yoqolsin
+        errorMessage.textContent = "Email nomida kamida 5ta element bo'lishi kerak!"
+        // 2 sekunddan keyin yo'qolsin
         setTimeout(() => {
             errorMessage.textContent = "";
         }, 2000);
         return;
     }
     else if (!passwordRegex.test(parol)) {
-        errorMessage.textContent = "Parolda 5ta belgi bolishi kerak!";
-        // 2 sekunddan keyin yoqolsin
+        errorMessage.textContent = "Parolda kamida 5ta belgi bo'lishi kerak!";
+        // 2 sekunddan keyin yo'qolsin
         setTimeout(() => {
             errorMessage.textContent = "";
         }, 2000);
@@ -94,7 +94,7 @@ async function handleNext() {
         if (!res.ok) {
             const data = await res.json();
             errorMessage.textContent = data.message || "Xatolik yuz berdi!";
-            // 2 sekunddan keyin yoqolsin
+            // 2 sekunddan keyin yo'qolsin
             setTimeout(() => {
                 errorMessage.textContent = "";
             }, 2000);
@@ -102,7 +102,7 @@ async function handleNext() {
         }
     } catch (err) {
         errorMessage.textContent = `Serverga ulanishda xatolik: ${err.message}`;
-        // 2 sekunddan keyin yoqolsin
+        // 2 sekunddan keyin yo'qolsin
         setTimeout(() => {
             errorMessage.textContent = "";
         }, 2000);
@@ -175,7 +175,7 @@ async function send() {
     const dayIntValue = dayInt.value.trim();
     const monthIntValue = monthInt.value.trim();
     const yearIntValue = yearInt.value.trim();
-    const genderSelValue = genderSel.value.trim() || "Kritilmagan!";
+    const genderSelValue = genderSel.value.trim() || "Kiritilmagan!";
 
     if (day <= 0 || day > maxDay) {
         if (month === 2 && day === 29) {
@@ -222,7 +222,7 @@ async function send() {
         return;
     }
     else if (nameInt.value.length < 5) {
-        errorMessage2.textContent = "Ismda kamida 5 ta element bolishi kerak!";
+        errorMessage2.textContent = "Ismda kamida 5ta element bo'lishi kerak!";
         setTimeout(() => {
             errorMessage2.textContent = "";
         }, 2000);
@@ -269,11 +269,11 @@ async function send() {
 
                 document.querySelectorAll("#step1 input, #step2 input, #step2 select")
                     .forEach(el => el.classList.remove("success"));
-                sendBtn.textContent = "Send";
+                sendBtn.textContent = "Yuborish";
                 sendBtn.classList.remove("success");
                 sendBtn.classList.add("reset"); // animatsiya bilan qaytsin
 
-                // Success xabarini ham yoqamiz
+                // Success xabarini ham yo'qamiz
                 errorMessage2.textContent = "";
                 errorMessage2.classList.remove("success-box");
             }, 2000);
@@ -295,11 +295,11 @@ async function send() {
                 step2.classList.remove("unsuccess");
                 document.querySelectorAll("#step1 input, #step2 input, #step2 select")
                     .forEach(el => el.classList.remove("unsuccess"));
-                sendBtn.textContent = "Send";
+                sendBtn.textContent = "Yuborish";
                 sendBtn.classList.remove("unsuccess");
                 sendBtn.classList.add("reset"); // animatsiya bilan qaytsin
 
-                // Error xabarini ham yoqamiz
+                // Error xabarini ham yo'qamiz
                 errorMessage2.textContent = "";
                 errorMessage2.classList.remove("error-box");
             }, 2000);
@@ -307,7 +307,7 @@ async function send() {
     } catch (err) {
         errorMessage2.textContent = `❌ Serverga ulanishda xatolik: ${err.message}`;
         errorMessage2.style.color = "#dc3545";
-        // 2 sekunddan keyin yoqolsin
+        // 2 sekunddan keyin yo'qolsin
         setTimeout(() => {
             errorMessage2.textContent = "";
             errorMessage2.style.color = "";
